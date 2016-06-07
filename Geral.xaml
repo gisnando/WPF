@@ -1,0 +1,69 @@
+﻿<ResourceDictionary x:Class="Hawk.View.Themes.Geral"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:hcui="clr-namespace:Hawk.Core.UI;assembly=Hawk.Core">
+
+
+    <ImageBrush x:Key="CloseButtonImageBrush" ImageSource="Images/close-window-26.png" Stretch="UniformToFill"/>
+    
+    <Style x:Key="textBlockLink" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Foreground" Value="Red" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource CloseButtonImageBrush}"/>
+        <Setter Property="IsTabStop" Value="False"></Setter>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{StaticResource CloseButtonImageBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource CloseButtonImageBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type xctk:MaskedTextBox}}" TargetType="{x:Type xctk:MaskedTextBox}">
+        <EventSetter Event="GotMouseCapture" Handler="maskedTextBox_GotMouseCapture" />
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style BasedOn="{StaticResource {x:Type ToolBarTray}}" TargetType="{x:Type ToolBarTray}">
+        <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+    </Style>
+
+    <Style x:Key="{x:Static ToolBar.ButtonStyleKey}" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="{x:Type Button}">
+        <Setter Property="Padding" Value="10,1,10,1"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Focusable" Value="False"/>
+    </Style>
+    
+    <Style BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type ComboBox}">
+        <EventSetter Event="KeyDown" Handler="ComboBox_KeyDown"/>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type ListView}}" TargetType="{x:Type ListView}">
+        <Setter Property="hcui:GridViewSort.AutoSort" Value="True"/>
+    </Style>
+
+</ResourceDictionary>
